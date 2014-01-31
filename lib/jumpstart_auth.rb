@@ -38,14 +38,14 @@ class JumpstartAuth
 
   def self.twitter
     setup_oauth unless load_settings
-    Twitter.configure do |config|
+    client = Twitter::REST::Client.new do |config|
       config.consumer_key = @@credentials[:consumer_key]
       config.consumer_secret = @@credentials[:consumer_secret]
       config.oauth_token = @@credentials[:oauth_token]
       config.oauth_token_secret = @@credentials[:oauth_secret]
     end
 
-    return client_class.new
+    return client
   end
 
 private
